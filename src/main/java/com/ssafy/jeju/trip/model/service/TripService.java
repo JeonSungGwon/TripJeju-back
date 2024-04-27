@@ -1,6 +1,9 @@
 package com.ssafy.jeju.trip.model.service;
 
+import java.util.List;
 
-public class TripService {
+import com.ssafy.jeju.trip.model.TripDto;
 
+public interface TripService {
+	List<TripDto> selectTripSpot();
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.jeju.trip.model.mapper.TripMapper">
+
+    <select id="selectTripSpot" resultType="com.ssafy.jeju.trip.model.TripDto">
+        SELECT 
+            spot_id,
+            title,
+            address,
+            road_address,
+            introduction,
+            tags,
+            latitude,
+            longitude,
+            phone_number,
+            img_path
+        FROM
+            spot
+        
+    </select>
+
+</mapper>
