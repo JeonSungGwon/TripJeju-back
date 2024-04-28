@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.favorite.model.mapper.FavoriteMapper">
+
+    <insert id="insertFavorite">
+        INSERT INTO favorite (user_id, place_id, code)
+        VALUES (#{userId}, #{placeId}, #{code})
+    </insert>
+
+    <select id="selectFavoriteById" resultType="com.ssafy.jeju.favorite.model.dto.Favorite">
+        SELECT * FROM favorite WHERE favorite_id = #{favoriteId}
+    </select>
+
+    <select id="selectAllFavorites" resultType="com.ssafy.jeju.favorite.model.dto.Favorite">
+        SELECT * FROM favorite
+    </select>
+
+    <update id="updateFavorite">
+        UPDATE favorite
+        SET user_id = #{userId}, place_id = #{placeId}, code = #{code}
+        WHERE favorite_id = #{favoriteId}
+    </update>
+
+    <delete id="deleteFavorite">
+        DELETE FROM favorite WHERE favorite_id = #{favoriteId}
+    </delete>
+
+</mapper>
