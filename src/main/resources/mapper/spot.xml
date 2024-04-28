@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.spot.model.mapper.SpotMapper">
+
+    <insert id="insertSpot">
+        INSERT INTO spot (title, address, road_address, introduction, tags, latitude, longitude, code, phone_number, img_path)
+        VALUES (#{title}, #{address}, #{roadAddress}, #{introduction}, #{tags}, #{latitude}, #{longitude}, #{code}, #{phoneNumber}, #{imgPath})
+    </insert>
+
+    <select id="selectSpotBySpotId" resultType="com.ssafy.jeju.spot.model.dto.Spot">
+        SELECT * FROM spot WHERE spot_id = #{spotId}
+    </select>
+
+    <select id="selectAllSpots" resultType="com.ssafy.jeju.spot.model.dto.Spot">
+        SELECT * FROM spot
+    </select>
+
+    <update id="updateSpot">
+        UPDATE spot
+        SET title = #{title}, address = #{address}, road_address = #{roadAddress}, introduction = #{introduction}, tags = #{tags}, latitude = #{latitude}, longitude = #{longitude}, code = #{code}, phone_number = #{phoneNumber}, img_path = #{imgPath}
+        WHERE spot_id = #{spotId}
+    </update>
+
+    <delete id="deleteSpot">
+        DELETE FROM spot WHERE spot_id = #{spotId}
+    </delete>
+
+</mapper>
