@@ -10,6 +10,6 @@ public interface SpotMapper {
 	void insertSpot(Spot spot);
 	Spot selectSpotBySpotId(int spotId);
 	List<Spot> selectAllSpots();
-	void updateSpot(Spot spot);
+	void updateSpot(int spotId);
 	void deleteSpot(int spotId);
 }

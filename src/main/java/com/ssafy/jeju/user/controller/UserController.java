@@ -34,9 +34,9 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateUser(@RequestBody User user) {
-        userService.updateUser(user);
+    @PutMapping("/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable int id) {
+        userService.updateUser(id);
         return ResponseEntity.ok("User updated successfully");
     }
 

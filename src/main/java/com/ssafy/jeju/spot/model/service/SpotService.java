@@ -8,6 +8,6 @@ public interface SpotService {
 	void createSpot(Spot spot);
 	Spot getSpotBySpotId(int spotId);
 	List<Spot> getAllSpots();
-	void updateSpot(Spot spot);
+	void updateSpot(int spotId);
 	void deleteSpot(int spotId);
 }

@@ -29,8 +29,8 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
-    public void updateFavorite(Favorite favorite) {
-        favoriteMapper.updateFavorite(favorite);
+    public void updateFavorite(int favoriteId) {
+        favoriteMapper.updateFavorite(favoriteId);
     }
 
     @Override

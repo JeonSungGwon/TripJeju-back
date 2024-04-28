@@ -35,8 +35,8 @@ public class FavoriteController {
     }
 
     @PutMapping
-    public ResponseEntity<String> updateFavorite(@RequestBody Favorite favorite) {
-        favoriteService.updateFavorite(favorite);
+    public ResponseEntity<String> updateFavorite(@PathVariable int favoriteId) {
+        favoriteService.updateFavorite(favoriteId);
         return ResponseEntity.ok("Favorite updated successfully");
     }
 

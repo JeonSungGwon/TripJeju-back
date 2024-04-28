@@ -10,6 +10,6 @@ public interface FavoriteMapper {
     void insertFavorite(Favorite favorite);
     Favorite selectFavoriteById(int favoriteId);
     List<Favorite> selectAllFavorites();
-    void updateFavorite(Favorite favorite);
+    void updateFavorite(int favoriteId);
     void deleteFavorite(int favoriteId);
 }

@@ -29,8 +29,8 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public void updateSpot(Spot spot) {
-		spotMapper.updateSpot(spot);
+	public void updateSpot(int spotId) {
+		spotMapper.updateSpot(spotId);
 	}
 
 	@Override

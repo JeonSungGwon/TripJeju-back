@@ -34,13 +34,13 @@ public class SpotController {
 		return ResponseEntity.ok(spots);
 	}
 
-	@PutMapping
-	public ResponseEntity<String> updateSpot(@RequestBody Spot spot) {
-		spotService.updateSpot(spot);
+	@PutMapping("/{spotId}")
+	public ResponseEntity<String> updateSpot(@PathVariable int spotId) {
+		spotService.updateSpot(spotId);
 		return ResponseEntity.ok("Spot updated successfully");
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/{spotId}")
 	public ResponseEntity<String> deleteSpot(@PathVariable int spotId) {
 		spotService.deleteSpot(spotId);
 		return ResponseEntity.ok("Spot deleted successfully");

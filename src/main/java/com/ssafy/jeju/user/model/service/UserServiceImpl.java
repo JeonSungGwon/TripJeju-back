@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		userMapper.updateUser(user);
+	public void updateUser(int id) {
+		userMapper.updateUser(id);
 	}
 
 	@Override
