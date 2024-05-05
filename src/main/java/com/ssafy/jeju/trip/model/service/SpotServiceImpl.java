@@ -16,13 +16,13 @@ public class SpotServiceImpl implements SpotService {
 	private final SpotMapper spotMapper;
 
 	@Override
-	public void createSpot(Spot spot) {
-		spotMapper.insertSpot(spot);
+	public List<Spot> getSpotBySpotTitle(String title, String type) {
+		return spotMapper.selectSpotBySpotTitle(title, type);
 	}
 
 	@Override
-	public Spot getSpotBySpotId(int spotId) {
-		return spotMapper.selectSpotBySpotId(spotId);
+	public List<Spot> getSpotBySpotTag(String tag, String type) {
+		return spotMapper.selectSpotBySpotTag(tag, type);
 	}
 
 	@Override
@@ -30,13 +30,5 @@ public class SpotServiceImpl implements SpotService {
 		return spotMapper.selectAllSpots();
 	}
 
-	@Override
-	public void updateSpot(int spotId) {
-		spotMapper.updateSpot(spotId);
-	}
-
-	@Override
-	public void deleteSpot(int spotId) {
-		spotMapper.deleteSpot(spotId);
-	}
+	
 }

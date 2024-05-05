@@ -6,16 +6,20 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Spot {
-    private int spotId;
+    private Long id;
     private String title;
     private String address;
     private String roadAddress;
     private String introduction;
-    private String tags;
-    private double latitude;
-    private double longitude;
-    private String code;
+    private String allTag;
+    private String tag;
+    private String reg1;
+    private String reg2;
+    private String value;
+    private Double latitude;
+    private Double longitude;
     private String phoneNumber;
     private String imgPath;
+
     
 }   

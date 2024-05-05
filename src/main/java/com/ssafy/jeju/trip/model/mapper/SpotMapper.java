@@ -8,9 +8,7 @@ import com.ssafy.jeju.trip.model.dto.Spot;
 
 @Mapper
 public interface SpotMapper {
-	void insertSpot(Spot spot);
-	Spot selectSpotBySpotId(int spotId);
+	List<Spot> selectSpotBySpotTitle(String title, String type);
+	List<Spot> selectSpotBySpotTag(String tag, String type);
 	List<Spot> selectAllSpots();
-	void updateSpot(int spotId);
-	void deleteSpot(int spotId);
 }

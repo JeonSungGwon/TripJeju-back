@@ -6,9 +6,7 @@ import java.util.List;
 import com.ssafy.jeju.trip.model.dto.Spot;
 
 public interface SpotService {
-	void createSpot(Spot spot);
-	Spot getSpotBySpotId(int spotId);
+	List<Spot> getSpotBySpotTitle(String title, String type);
+	List<Spot> getSpotBySpotTag(String tag, String type);
 	List<Spot> getAllSpots();
-	void updateSpot(int spotId);
-	void deleteSpot(int spotId);
 }
