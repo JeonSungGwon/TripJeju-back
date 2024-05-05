@@ -16,10 +16,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+    @PostMapping("/signup")
+    public ResponseEntity<String> signup(@RequestBody User user) {
         userService.createUser(user);
         return ResponseEntity.ok("User created successfully");
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User user) {
+        User loginUser = userService.login(user);
+        return ResponseEntity.ok(loginUser);
     }
 
     @GetMapping("/{userId}")

@@ -8,6 +8,10 @@
 		VALUES (#{userId}, #{userName}, #{userPassword}, #{userEmail})
 	</insert>
 
+	<select id="login" resultType="com.ssafy.jeju.user.model.dto.User">
+        SELECT * FROM user WHERE user_id = #{userId} AND user_password = #{userPassword}
+    </select>
+
 	<select id="selectUserByUserId" resultType="com.ssafy.jeju.user.model.dto.User">
 		SELECT * FROM user WHERE user_id = #{userId}
 	</select>
