@@ -1,8 +1,9 @@
-package com.ssafy.jeju.spot.model.service;
+package com.ssafy.jeju.trip.model.service;
 
-import com.ssafy.jeju.spot.model.dto.Spot;
 
 import java.util.List;
+
+import com.ssafy.jeju.trip.model.dto.Spot;
 
 public interface SpotService {
 	void createSpot(Spot spot);

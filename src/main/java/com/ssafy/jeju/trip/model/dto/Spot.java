@@ -1,4 +1,4 @@
-package com.ssafy.jeju.spot.model.dto;
+package com.ssafy.jeju.trip.model.dto;
 
 import lombok.*;
 
