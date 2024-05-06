@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.routeDetail.model.mapper.RouteDetailMapper">
+
+    <select id="findAll" resultType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
+        SELECT id, route_id, place_id, sequence
+        FROM route_detail
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
+        SELECT id, route_id, place_id, sequence
+        FROM route_detail
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByRouteId" parameterType="long" resultType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
+        SELECT id, route_id, place_id, sequence
+        FROM route_detail
+        WHERE route_id = #{routeId}
+    </select>
+
+    <insert id="insert" parameterType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
+        INSERT INTO route_detail (route_id, place_id, sequence)
+        VALUES (#{routeId}, #{placeId}, #{sequence})
+    </insert>
+
+    <update id="update" parameterType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
+        UPDATE route_detail
+        SET route_id = #{routeId}, place_id = #{placeId}, sequence = #{sequence}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM route_detail
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
