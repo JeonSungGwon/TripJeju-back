@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.board.model.mapper.BoardMapper">
+
+    <!-- 전체 조회 -->
+    <select id="findAll" resultType="com.ssafy.jeju.board.model.dto.Board">
+        SELECT id, name, description
+        FROM board
+    </select>
+
+    <!-- ID로 조회 -->
+    <select id="findById" parameterType="int" resultType="com.ssafy.jeju.board.model.dto.Board">
+        SELECT id, name, description
+        FROM board
+        WHERE id = #{id}
+    </select>
+
+    <!-- 삽입 -->
+    <insert id="insert" parameterType="com.ssafy.jeju.board.model.dto.Board">
+        INSERT INTO board (name, description)
+        VALUES (#{name}, #{description})
+    </insert>
+
+    <!-- 갱신 -->
+    <update id="update" parameterType="com.ssafy.jeju.board.model.dto.Board">
+        UPDATE board
+        SET name = #{name}, description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 삭제 -->
+    <delete id="delete" parameterType="int">
+        DELETE FROM board
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
