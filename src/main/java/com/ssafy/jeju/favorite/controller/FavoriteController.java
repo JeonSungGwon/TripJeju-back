@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/favorites")
+@RequestMapping("/favorite")
 public class FavoriteController {
     private final FavoriteService favoriteService;
 
@@ -16,34 +16,38 @@ public class FavoriteController {
         this.favoriteService = favoriteService;
     }
 
-    @PostMapping
-    public ResponseEntity<Favorite> createFavorite(@RequestBody Favorite favorite) {
-        favoriteService.createFavorite(favorite);
-        return ResponseEntity.ok(favorite);
-    }
-
-    @GetMapping("/{favoriteId}")
-    public ResponseEntity<Favorite> getFavoriteById(@PathVariable int favoriteId) {
-        Favorite favorite = favoriteService.getFavoriteById(favoriteId);
-        return ResponseEntity.ok(favorite);
-    }
-
     @GetMapping
     public ResponseEntity<List<Favorite>> getAllFavorites() {
-        List<Favorite> favorites = favoriteService.getAllFavorites();
-        return ResponseEntity.ok(favorites);
+        return ResponseEntity.ok(favoriteService.findAll());
     }
 
-    @PutMapping
-    public ResponseEntity<String> updateFavorite(@PathVariable int favoriteId) {
-        favoriteService.updateFavorite(favoriteId);
-        return ResponseEntity.ok("Favorite updated successfully");
+    @GetMapping("/{id}")
+    public ResponseEntity<Favorite> getFavoriteById(@PathVariable long id) {
+        Favorite favorite = favoriteService.findById(id);
+        return favorite != null ? ResponseEntity.ok(favorite) : ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{favoriteId}")
-    public ResponseEntity<String> deleteFavorite(@PathVariable int favoriteId) {
-        favoriteService.deleteFavorite(favoriteId);
-        return ResponseEntity.ok("Favorite deleted successfully");
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Favorite>> getFavoritesByUserId(@PathVariable long userId) {
+        List<Favorite> favorites = favoriteService.findByUserId(userId);
+        return !favorites.isEmpty() ? ResponseEntity.ok(favorites) : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Favorite> createFavorite(@RequestBody Favorite favorite) {
+        if (favoriteService.save(favorite)) {
+            return ResponseEntity.ok(favorite);
+        } else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteFavorite(@PathVariable long id) {
+        if (favoriteService.delete(id)) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
-

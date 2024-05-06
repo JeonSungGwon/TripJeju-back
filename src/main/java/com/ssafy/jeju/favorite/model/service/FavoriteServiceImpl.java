@@ -2,39 +2,42 @@ package com.ssafy.jeju.favorite.model.service;
 
 import com.ssafy.jeju.favorite.model.dto.Favorite;
 import com.ssafy.jeju.favorite.model.mapper.FavoriteMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class FavoriteServiceImpl implements FavoriteService {
-
     private final FavoriteMapper favoriteMapper;
 
-    @Override
-    public void createFavorite(Favorite favorite) {
-        favoriteMapper.insertFavorite(favorite);
+    public FavoriteServiceImpl(FavoriteMapper favoriteMapper) {
+        this.favoriteMapper = favoriteMapper;
     }
 
     @Override
-    public Favorite getFavoriteById(int favoriteId) {
-        return favoriteMapper.selectFavoriteById(favoriteId);
+    public List<Favorite> findAll() {
+        return favoriteMapper.findAll();
     }
 
     @Override
-    public List<Favorite> getAllFavorites() {
-        return favoriteMapper.selectAllFavorites();
+    public Favorite findById(long id) {
+        return favoriteMapper.findById(id);
     }
 
     @Override
-    public void updateFavorite(int favoriteId) {
-        favoriteMapper.updateFavorite(favoriteId);
+    public List<Favorite> findByUserId(long userId) {
+        return favoriteMapper.findByUserId(userId);
     }
 
     @Override
-    public void deleteFavorite(int favoriteId) {
-        favoriteMapper.deleteFavorite(favoriteId);
+    @Transactional
+    public boolean save(Favorite favorite) {
+        return favoriteMapper.insert(favorite) > 0;
+    }
+
+    @Override
+    @Transactional
+    public boolean delete(long id) {
+        return favoriteMapper.delete(id) > 0;
     }
 }
