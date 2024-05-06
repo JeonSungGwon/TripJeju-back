@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.comment.model.mapper.CommentMapper">
+
+    <select id="findAll" resultType="com.ssafy.jeju.comment.model.dto.Comment">
+        SELECT id, parent_id, post_id, user_id, content, author, created_at
+        FROM comment
+    </select>
+
+    <select id="findById" parameterType="int" resultType="com.ssafy.jeju.comment.model.dto.Comment">
+        SELECT id, parent_id, post_id, user_id, content, author, created_at
+        FROM comment
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByPostId" parameterType="int" resultType="com.ssafy.jeju.comment.model.dto.Comment">
+        SELECT id, parent_id, post_id, user_id, content, author, created_at
+        FROM comment
+        WHERE post_id = #{postId}
+    </select>
+
+    <insert id="insert" parameterType="com.ssafy.jeju.comment.model.dto.Comment">
+        INSERT INTO comment (parent_id, post_id, user_id, content, author, created_at)
+        VALUES (#{parentId}, #{postId}, #{userId}, #{content}, #{author}, CURRENT_TIMESTAMP)
+    </insert>
+
+    <update id="update" parameterType="com.ssafy.jeju.comment.model.dto.Comment">
+        UPDATE comment
+        SET parent_id = #{parentId}, post_id = #{postId}, user_id = #{userId}, content = #{content}, author = #{author}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM comment
+        WHERE id = #{id}
+    </delete>
+
+</mapper>
