@@ -15,7 +15,7 @@ public class Spot {
     private String tag;
     private String reg1;
     private String reg2;
-    private String value;
+    private String type;
     private Double latitude;
     private Double longitude;
     private String phoneNumber;

@@ -21,14 +21,14 @@ public class SpotController {
 	}
 
 
-	@GetMapping("/title/{title}")
-	public ResponseEntity<List<Spot>> getSpotBySpotTitle(@PathVariable String title) {
-		List<Spot> spots = spotService.getSpotBySpotTitle(title);
+	@GetMapping("/title/{type}/{title}")
+	public ResponseEntity<List<Spot>> getSpotBySpotTitle(@PathVariable String title, @PathVariable String type) {
+		List<Spot> spots = spotService.getSpotBySpotTitle(title, type);
 		return ResponseEntity.ok(spots);
 	}
-	@GetMapping("/tag/{tag}")
-	public ResponseEntity<List<Spot>> getSpotBySpotTag(@PathVariable String tag) {
-		List<Spot> spots = spotService.getSpotBySpotTag(tag);
+	@GetMapping("/tag/{type}/{tag}")
+	public ResponseEntity<List<Spot>> getSpotBySpotTag(@PathVariable String tag, @PathVariable String type) {
+		List<Spot> spots = spotService.getSpotBySpotTag(tag, type);
 		return ResponseEntity.ok(spots);
 	}
 
