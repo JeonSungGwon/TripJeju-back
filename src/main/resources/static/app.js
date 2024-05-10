@@ -35,7 +35,7 @@ function loadSpots(page) {
             clearMarkers(); // 기존 마커 제거
             spots.forEach(spot => {
                 const listItem = document.createElement('div');
-                listItem.innerHTML = `<h3>${spot.title}</h3><img src="${spot.imgPath}" alt="${spot.title}" style="width:100%;"><p>${spot.introduction}</p>`;
+                listItem.innerHTML = `<h3>${spot.title}</h3><img src="${spot.thumbnailPath}" alt="${spot.title}" style="width:100%;"><p>${spot.introduction}</p>`;
                 listContainer.appendChild(listItem);
 
                 // 새로운 마커 생성 및 배열에 추가
