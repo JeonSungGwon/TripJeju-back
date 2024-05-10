@@ -1,12 +1,10 @@
 package com.ssafy.jeju.trip.controller;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.jeju.trip.model.dto.Spot;
 import com.ssafy.jeju.trip.model.service.SpotService;
@@ -33,9 +31,11 @@ public class SpotController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Spot>> getAllSpots() {
-		List<Spot> spots = spotService.getAllSpots();
+	public ResponseEntity<List<Spot>> getAllSpots(@RequestParam(defaultValue = "0") int page,
+												  @RequestParam(defaultValue = "10") int size) {
+		List<Spot> spots = spotService.getAllSpots(page, size);
 		return ResponseEntity.ok(spots);
 	}
+
 
 }

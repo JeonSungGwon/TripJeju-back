@@ -26,8 +26,9 @@ public class SpotServiceImpl implements SpotService {
 	}
 
 	@Override
-	public List<Spot> getAllSpots() {
-		return spotMapper.selectAllSpots();
+	public List<Spot> getAllSpots(int page, int size) {
+		int offset = page * size;
+		return spotMapper.selectAllSpots(offset, size);
 	}
 
 	

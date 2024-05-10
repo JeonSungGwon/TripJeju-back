@@ -20,6 +20,7 @@ public class Spot {
     private Double longitude;
     private String phoneNumber;
     private String imgPath;
+    private String thumbnailPath;
 
     
 }   
