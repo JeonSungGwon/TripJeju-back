@@ -1,0 +1,15 @@
+#mainContainer {
+    display: flex;
+    height: 100vh;
+}
+
+#listContainer {
+    width: 40%;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+#mapContainer {
+    width: 60%;
+    height: 100%;
+}
