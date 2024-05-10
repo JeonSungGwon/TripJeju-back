@@ -14,10 +14,10 @@
     </select>
 
     <select id="selectAllSpots" resultType="com.ssafy.jeju.trip.model.dto.Spot">
-        SELECT * FROM spot
+        SELECT *, (SELECT COUNT(*) FROM spot) as count FROM spot
         ORDER BY id
             LIMIT #{size} OFFSET #{offset}
     </select>
-		
+
 
 </mapper>

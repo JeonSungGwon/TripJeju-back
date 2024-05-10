@@ -9,15 +9,14 @@
     <script src="app.js" defer></script>
 </head>
 <body>
-<div id="pagination">
-    <button onclick="previousPage()">Previous</button>
-    <span id="pageNumber">1</span>
-    <button onclick="nextPage()">Next</button>
-</div>
-
 <div id="mainContainer">
     <div id="listContainer"></div>
     <div id="mapContainer"></div>
+</div>
+<div id="pagination">
+    <button onclick="previousPage()">Previous</button>
+    <span id="pageNumbers"></span> <!-- 현재 페이지 번호가 여기에 표시됩니다 -->
+    <button onclick="nextPage()">Next</button>
 </div>
 </body>
 </html>
