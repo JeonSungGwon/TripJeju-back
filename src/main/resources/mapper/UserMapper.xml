@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.user.model.mapper.UserMapper">
+
+    <resultMap id="UserResultMap" type="com.ssafy.jeju.user.model.dto.User">
+        <id column="user_id" property="id"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="image_url" property="imageUrl"/>
+        <result column="age" property="age"/>
+        <result column="city" property="city"/>
+        <result column="role" property="role"/>
+        <result column="social_type" property="socialType"/>
+        <result column="social_id" property="socialId"/>
+        <result column="refresh_token" property="refreshToken"/>
+    </resultMap>
+
+    <select id="findByEmail" resultMap="UserResultMap">
+        SELECT * FROM USERS WHERE email=#{email}
+    </select>
+
+    <select id="findByNickname" resultMap="UserResultMap">
+        SELECT * FROM USERS WHERE nickname=#{nickname}
+    </select>
+
+    <select id="findByRefreshToken" resultMap="UserResultMap">
+        SELECT * FROM USERS WHERE refresh_token=#{refreshToken}
+    </select>
+
+    <select id="findBySocialTypeAndSocialId" resultMap="UserResultMap" parameterType="java.util.Map">
+        SELECT * FROM USERS WHERE social_type=#{socialType} AND social_id=#{socialId}
+    </select>
+
+    <!-- UserMapper.xml -->
+    <insert id="saveUser" parameterType="com.ssafy.jeju.user.model.dto.User">
+        INSERT INTO users (email, password, nickname, image_url, age, city, role, social_type, social_id, refresh_token)
+        VALUES (#{email}, #{password}, #{nickname}, #{imageUrl}, #{age}, #{city}, #{role}, #{socialType}, #{socialId}, #{refreshToken})
+    </insert>
+
+    <!-- UserMapper.xml -->
+    <update id="updateUser" parameterType="com.ssafy.jeju.user.model.dto.User">
+        UPDATE users SET
+                         email = #{email},
+                         password = #{password},
+                         nickname = #{nickname},
+                         image_url = #{imageUrl},
+                         age = #{age},
+                         city = #{city},
+                         role = #{role},
+                         social_type = #{socialType},
+                         social_id = #{socialId},
+                         refresh_token = #{refreshToken}
+        WHERE user_id = #{id}
+    </update>
+
+
+</mapper>
