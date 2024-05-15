@@ -49,9 +49,9 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Collections.singletonList("*"));
+                        config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
                         config.setAllowedMethods(Collections.singletonList("*"));
-                        config.setAllowCredentials(true);
+                        config.setAllowCredentials(false);
                         config.setAllowedHeaders(Collections.singletonList("*"));
                         config.setMaxAge(3600L); //1시간
                         return config;
@@ -66,10 +66,14 @@ public class SecurityConfig {
                 .sessionManagement(c ->
                         c.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 세션 사용하지 않음
                 .authorizeRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.GET, "/", "/oauth2/sign-up", "/oauth2/authorization/*",
-                                "/css/**", "/images/**", "/js/**", "/favicon.ico", "/h2-console/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/sign-up").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers(HttpMethod.GET).permitAll()
+                                .requestMatchers(HttpMethod.POST).permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/", "/oauth2/sign-up", "/oauth2/authorization/*",
+//                                "/css/**", "/images/**", "/js/**", "/favicon.ico", "/h2-console/**").permitAll()
+
+//                        .requestMatchers(HttpMethod.POST, "/sign-up").permitAll()
+
+                                .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
                         .userInfoEndpoint(c -> c.userService(customOAuth2UserService))
