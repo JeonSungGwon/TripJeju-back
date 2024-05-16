@@ -40,4 +40,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     public boolean delete(long id) {
         return favoriteMapper.delete(id) > 0;
     }
+
+    @Override
+    public boolean isFavorite(long userId, long placeId) {
+        int count = favoriteMapper.countFavorites(userId, placeId);
+        return count > 0;
+    }
 }

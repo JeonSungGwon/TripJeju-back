@@ -29,4 +29,9 @@
         WHERE id = #{id}
     </delete>
 
+    <select id="countFavorites" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM favorite
+        WHERE user_id = #{userId} AND place_id = #{placeId}
+    </select>
+
 </mapper>

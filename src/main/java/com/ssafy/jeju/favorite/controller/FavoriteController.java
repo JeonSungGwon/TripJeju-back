@@ -50,4 +50,11 @@ public class FavoriteController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/user/{userId}/spot/{placeId}")
+    public ResponseEntity<Boolean> checkFavorite(@PathVariable long userId, @PathVariable long placeId) {
+        boolean isFavorite = favoriteService.isFavorite(userId, placeId);
+        return ResponseEntity.ok(isFavorite);
+    }
+
 }
