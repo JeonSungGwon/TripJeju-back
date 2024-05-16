@@ -68,6 +68,9 @@ public class SecurityConfig {
                 .authorizeRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.GET).permitAll()
                                 .requestMatchers(HttpMethod.POST).permitAll()
+                                .requestMatchers(HttpMethod.DELETE).permitAll()
+                                .requestMatchers(HttpMethod.PATCH).permitAll()
+                                .requestMatchers(HttpMethod.PUT).permitAll()
 //                        .requestMatchers(HttpMethod.GET, "/", "/oauth2/sign-up", "/oauth2/authorization/*",
 //                                "/css/**", "/images/**", "/js/**", "/favicon.ico", "/h2-console/**").permitAll()
 
