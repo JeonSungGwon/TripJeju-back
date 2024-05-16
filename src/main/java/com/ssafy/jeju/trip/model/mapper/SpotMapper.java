@@ -11,5 +11,7 @@ import org.apache.ibatis.annotations.Param;
 public interface SpotMapper {
 	List<Spot> selectSpotBySpotTitle(String title, String type);
 	List<Spot> selectSpotBySpotTag(String tag, String type);
+	List<Spot> selectSpotBySpotMonth(String month, String type);
 	List<Spot> selectAllSpots(@Param("offset") int offset, @Param("size") int size);
+
 }

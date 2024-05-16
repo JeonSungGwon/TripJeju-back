@@ -29,6 +29,11 @@ public class SpotController {
 		List<Spot> spots = spotService.getSpotBySpotTag(tag, type);
 		return ResponseEntity.ok(spots);
 	}
+	@GetMapping("/month/{type}/{month}")
+	public ResponseEntity<List<Spot>> getSpotBySpotMonth(@PathVariable String month, @PathVariable String type) {
+		List<Spot> spots = spotService.getSpotBySpotMonth(month, type);
+		return ResponseEntity.ok(spots);
+	}
 
 	@GetMapping
 	public ResponseEntity<List<Spot>> getAllSpots(@RequestParam(defaultValue = "0") int page,
@@ -39,3 +44,4 @@ public class SpotController {
 
 
 }
+

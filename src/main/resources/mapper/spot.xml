@@ -19,5 +19,12 @@
             LIMIT #{size} OFFSET #{offset}
     </select>
 
+    <select id="selectSpotBySpotMonth" resultType="com.ssafy.jeju.trip.model.dto.Spot">
+        SELECT  *
+        FROM spot
+        WHERE SUBSTRING(img_path, 52, 2) = #{month}
+        and type = #{type};
+    </select>
+
 
 </mapper>

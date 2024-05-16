@@ -19,6 +19,10 @@ public class SpotServiceImpl implements SpotService {
 	public List<Spot> getSpotBySpotTitle(String title, String type) {
 		return spotMapper.selectSpotBySpotTitle(title, type);
 	}
+	@Override
+	public List<Spot> getSpotBySpotMonth(String month, String type) {
+		return spotMapper.selectSpotBySpotMonth(month, type);
+	}
 
 	@Override
 	public List<Spot> getSpotBySpotTag(String tag, String type) {
