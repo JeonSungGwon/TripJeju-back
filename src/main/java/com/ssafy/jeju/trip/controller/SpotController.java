@@ -2,6 +2,7 @@ package com.ssafy.jeju.trip.controller;
 
 import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,15 +32,17 @@ public class SpotController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<List<Spot>> getSpots(@RequestParam(required = false) String title,
-											   @RequestParam(required = false) String tag,
-											   @RequestParam(required = false) String type,
-											   @RequestParam(required = false) String reg1,
-											   @RequestParam(required = false) String reg2,
-											   @RequestParam(defaultValue = "0") int page,
-											   @RequestParam(defaultValue = "10") int size) {
-		List<Spot> spots = spotService.getSpots(title, tag, type, reg1, reg2, page, size);
-		return ResponseEntity.ok(spots);
+	public ResponseEntity<Map<String, Object>> getSpots(
+			@RequestParam(required = false) String title,
+			@RequestParam(required = false) String tag,
+			@RequestParam(required = false) String type,
+			@RequestParam(required = false) String reg1,
+			@RequestParam(required = false) String reg2,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+
+		Map<String, Object> result = spotService.getSpots(title, tag, type, reg1, reg2, page, size);
+		return ResponseEntity.ok(result);
 	}
 	@GetMapping("/month/{type}/{month}")
 	public ResponseEntity<List<Spot>> getSpotBySpotMonth(@PathVariable String month, @PathVariable String type) {

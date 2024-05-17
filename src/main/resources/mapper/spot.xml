@@ -38,6 +38,27 @@
         LIMIT #{size} OFFSET #{offset}
     </select>
 
+    <select id="countSpots" resultType="int">
+        SELECT COUNT(*)
+        FROM spot
+        WHERE true
+        <if test="title != null and title != ''">
+            AND title LIKE CONCAT('%', #{title}, '%')
+        </if>
+        <if test="tag != null and tag != ''">
+            AND tag LIKE CONCAT('%', #{tag}, '%')
+        </if>
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="reg1 != null and reg1 != ''">
+            AND reg1 = #{reg1}
+        </if>
+        <if test="reg2 != null and reg2 != ''">
+            AND reg2 = #{reg2}
+        </if>
+    </select>
+
     <select id="selectAllSpots" resultType="com.ssafy.jeju.trip.model.dto.Spot">
         SELECT *, (SELECT COUNT(*) FROM spot) as count
         FROM spot
