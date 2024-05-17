@@ -19,14 +19,26 @@ public class SpotController {
 	}
 
 
-	@GetMapping("/title/{type}/{title}")
+	@GetMapping("/title/{title}/{type}")
 	public ResponseEntity<List<Spot>> getSpotBySpotTitle(@PathVariable String title, @PathVariable String type) {
 		List<Spot> spots = spotService.getSpotBySpotTitle(title, type);
 		return ResponseEntity.ok(spots);
 	}
-	@GetMapping("/tag/{type}/{tag}")
+	@GetMapping("/tag/{tag}/{type}")
 	public ResponseEntity<List<Spot>> getSpotBySpotTag(@PathVariable String tag, @PathVariable String type) {
 		List<Spot> spots = spotService.getSpotBySpotTag(tag, type);
+		return ResponseEntity.ok(spots);
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<List<Spot>> getSpots(@RequestParam(required = false) String title,
+											   @RequestParam(required = false) String tag,
+											   @RequestParam(required = false) String type,
+											   @RequestParam(required = false) String reg1,
+											   @RequestParam(required = false) String reg2,
+											   @RequestParam(defaultValue = "0") int page,
+											   @RequestParam(defaultValue = "10") int size) {
+		List<Spot> spots = spotService.getSpots(title, tag, type, reg1, reg2, page, size);
 		return ResponseEntity.ok(spots);
 	}
 	@GetMapping("/month/{type}/{month}")

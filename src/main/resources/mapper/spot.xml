@@ -4,26 +4,51 @@
 <mapper namespace="com.ssafy.jeju.trip.model.mapper.SpotMapper">
 
 
-
     <select id="selectSpotBySpotTitle" resultType="com.ssafy.jeju.trip.model.dto.Spot">
-    	SELECT * FROM spot WHERE type = #{type} and title LIKE CONCAT('%', #{title}, '%')
-	</select>
+        SELECT *
+        FROM spot
+        WHERE type = #{type}
+          and title LIKE CONCAT('%', #{title}, '%')
+    </select>
 
     <select id="selectSpotBySpotTag" resultType="com.ssafy.jeju.trip.model.dto.Spot">
-        SELECT * FROM spot WHERE type = #{type} and tag LIKE CONCAT('%', #{tag}, '%')
+        SELECT *
+        FROM spot
+        WHERE type = #{type}
+          and tag LIKE CONCAT('%', #{tag}, '%')
+    </select>
+
+    <select id="selectSpots" resultType="com.ssafy.jeju.trip.model.dto.Spot">
+        SELECT * FROM spot WHERE true
+        <if test="title != null and title != ''">
+            AND title LIKE CONCAT('%', #{title}, '%')
+        </if>
+        <if test="tag != null and tag != ''">
+            AND tag LIKE CONCAT('%', #{tag}, '%')
+        </if>
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="reg1 != null and reg1 != ''">
+            AND reg1 = #{reg1}
+        </if>
+        <if test="reg2 != null and reg2 != ''">
+            AND reg2 = #{reg2}
+        </if>
+        LIMIT #{size} OFFSET #{offset}
     </select>
 
     <select id="selectAllSpots" resultType="com.ssafy.jeju.trip.model.dto.Spot">
-        SELECT *, (SELECT COUNT(*) FROM spot) as count FROM spot
-        ORDER BY id
-            LIMIT #{size} OFFSET #{offset}
+        SELECT *, (SELECT COUNT(*) FROM spot) as count
+        FROM spot
+        LIMIT #{size} OFFSET #{offset}
     </select>
 
     <select id="selectSpotBySpotMonth" resultType="com.ssafy.jeju.trip.model.dto.Spot">
-        SELECT  *
+        SELECT *
         FROM spot
         WHERE SUBSTRING(img_path, 52, 2) = #{month}
-        and type = #{type};
+          and type = #{type};
     </select>
 
 
