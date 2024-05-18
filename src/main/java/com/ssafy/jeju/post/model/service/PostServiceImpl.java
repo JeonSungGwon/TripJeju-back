@@ -26,6 +26,11 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> findByUserId(int userId) {
+        return postMapper.findByUserId(userId);
+    }
+
+    @Override
     public Post findById(int id) {
         return postMapper.findById(id);
     }
@@ -36,6 +41,7 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public void save(Post post) throws Exception{
         postMapper.insert(post);
+
         List<FileInfoDto> fileInfos = post.getFileInfos();
         if (fileInfos != null && !fileInfos.isEmpty()) {
             postMapper.registerFile(post);

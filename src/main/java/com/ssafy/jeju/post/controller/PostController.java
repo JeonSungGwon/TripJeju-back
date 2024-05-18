@@ -45,16 +45,20 @@ public class PostController {
         System.out.println(post);
         return ResponseEntity.ok(post);
     }
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Post>> getPostByUserId(@PathVariable int userId) {
+        return ResponseEntity.ok(postService.findByUserId(userId));
+    }
 
-    @GetMapping("spot/{spotId}")
+    @GetMapping("/spot/{spotId}")
     public ResponseEntity<List<Post>> getPostByPostId(@PathVariable int spotId) {
         return ResponseEntity.ok(postService.findBySpotId(spotId));
     }
 
     @PostMapping
-    public ResponseEntity<Post> createPost(@RequestPart("post") Post post, @RequestPart("upfile") MultipartFile[] files) throws Exception{
+    public ResponseEntity<Post> createPost(@RequestPart("post") Post post, @RequestParam(value = "upfile", required = false) MultipartFile[] files) throws Exception{
 
-        if (!files[0].isEmpty()) {
+        if (files != null) {
 //			String realPath = servletContext.getRealPath(UPLOAD_PATH);
 //			String realPath = servletContext.getRealPath("/resources/img");
             String today = new SimpleDateFormat("yyMMdd").format(new Date());

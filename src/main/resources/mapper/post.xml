@@ -28,6 +28,12 @@
         WHERE spot_id = #{id}
     </select>
 
+    <select id="findByUserId" parameterType="int" resultMap="viewArticle">
+        SELECT id, spot_id, user_id, title, content
+        FROM post
+        WHERE user_id = #{userId}
+    </select>
+
     <insert id="insert" parameterType="com.ssafy.jeju.post.model.dto.Post">
         INSERT INTO post (spot_id, user_id, title, content)
         VALUES (#{spotId}, #{userId}, #{title}, #{content})
