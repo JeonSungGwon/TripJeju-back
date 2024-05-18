@@ -1,6 +1,8 @@
 package com.ssafy.jeju.trip.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,17 @@ public class SpotServiceImpl implements SpotService {
 	@Override
 	public List<Spot> getSpotBySpotMonth(String month, String type) {
 		return spotMapper.selectSpotBySpotMonth(month, type);
+	}
+	@Override
+	public Map<String, Object> getSpots(String title, String tag, String type, String reg1, String reg2, int page, int size) {
+		int offset = page * size;
+		List<Spot> spots = spotMapper.selectSpots(title, tag, type, reg1, reg2, size, offset);
+		int total = spotMapper.countSpots(title, tag, type, reg1, reg2);
+
+		Map<String, Object> result = new HashMap<>();
+		result.put("spots", spots);
+		result.put("total", total);
+		return result;
 	}
 
 	@Override
