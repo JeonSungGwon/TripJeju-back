@@ -35,5 +35,10 @@ public class SpotServiceImpl implements SpotService {
 		return spotMapper.selectAllSpots(offset, size);
 	}
 
-	
+	@Override
+	public int getAllCount() {
+		return spotMapper.selectAllCount();
+	}
+
+
 }

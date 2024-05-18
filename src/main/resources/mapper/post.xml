@@ -2,25 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.jeju.post.model.mapper.PostMapper">
 
-    <select id="findAll" resultType="com.ssafy.jeju.post.model.dto.Post">
-        SELECT id, board_id, spot_id, user_id, title, content, author, created_at, updated_at
+    <resultMap type="com.ssafy.jeju.post.model.dto.Post" id="viewArticle">
+        <id property="id" column="id"/>
+        <result property="spotId" column="spot_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <collection property="fileInfos" column="id" javaType="list" ofType="com.ssafy.jeju.post.model.dto.FileInfoDto" select="fileInfoList"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="viewArticle">
+        SELECT id, spot_id, user_id, title, content
         FROM post
     </select>
 
     <select id="findById" parameterType="int" resultType="com.ssafy.jeju.post.model.dto.Post">
-        SELECT id, board_id, spot_id, user_id, title, content, author, created_at, updated_at
+        SELECT spot_id, user_id, title, content
         FROM post
         WHERE id = #{id}
     </select>
 
+    <select id="findBySpotId" parameterType="int" resultMap="viewArticle">
+        SELECT id, spot_id, user_id, title, content
+        FROM post
+        WHERE spot_id = #{id}
+    </select>
+
     <insert id="insert" parameterType="com.ssafy.jeju.post.model.dto.Post">
-        INSERT INTO post (board_id, spot_id, user_id, title, content, author, created_at, updated_at)
-        VALUES (#{boardId}, #{spotId}, #{userId}, #{title}, #{content}, #{author}, #{createdAt}, #{updatedAt})
+        INSERT INTO post (spot_id, user_id, title, content)
+        VALUES (#{spotId}, #{userId}, #{title}, #{content})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="registerFile" parameterType="com.ssafy.jeju.post.model.dto.Post">
+        INSERT INTO file_info (post_id, save_folder, original_file, save_file)
+        VALUES
+        <foreach collection="fileInfos" item="fileinfo" separator=",">
+            (#{id}, #{fileinfo.saveFolder}, #{fileinfo.originalFile}, #{fileinfo.saveFile})
+        </foreach>
     </insert>
 
     <update id="update" parameterType="com.ssafy.jeju.post.model.dto.Post">
         UPDATE post
-        SET board_id = #{boardId}, spot_id = #{spotId}, user_id = #{userId}, title = #{title}, content = #{content}, author = #{author}, updated_at = CURRENT_TIMESTAMP
+        SET spot_id = #{spotId}, user_id = #{userId}, title = #{title}, content = #{content}
         WHERE id = #{id}
     </update>
 
@@ -28,5 +54,11 @@
         DELETE FROM post
         WHERE id = #{id}
     </delete>
+
+    <select id="fileInfoList" resultType="com.ssafy.jeju.post.model.dto.FileInfoDto">
+        SELECT post_id, save_folder, original_file, save_file
+        FROM file_info
+        WHERE post_id = #{postId}
+    </select>
 
 </mapper>

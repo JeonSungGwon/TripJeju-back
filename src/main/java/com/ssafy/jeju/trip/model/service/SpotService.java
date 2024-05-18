@@ -11,4 +11,5 @@ public interface SpotService {
 	List<Spot> getSpotBySpotTag(String tag, String type);
 	List<Spot> getSpotBySpotMonth(String month, String type);
 	List<Spot> getAllSpots(int page, int size);
+	int getAllCount();
 }

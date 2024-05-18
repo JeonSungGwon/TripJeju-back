@@ -14,4 +14,5 @@ public interface SpotMapper {
 	List<Spot> selectSpotBySpotMonth(String month, String type);
 	List<Spot> selectAllSpots(@Param("offset") int offset, @Param("size") int size);
 
+	int selectAllCount();
 }

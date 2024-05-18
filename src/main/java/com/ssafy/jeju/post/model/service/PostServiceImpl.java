@@ -1,5 +1,6 @@
 package com.ssafy.jeju.post.model.service;
 
+import com.ssafy.jeju.post.model.dto.FileInfoDto;
 import com.ssafy.jeju.post.model.dto.Post;
 import com.ssafy.jeju.post.model.mapper.PostMapper;
 import org.springframework.stereotype.Service;
@@ -20,14 +21,25 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public List<Post> findBySpotId(int id) {
+        return postMapper.findBySpotId(id);
+    }
+
+    @Override
     public Post findById(int id) {
         return postMapper.findById(id);
     }
 
+
+
     @Override
     @Transactional
-    public boolean save(Post post) {
-        return postMapper.insert(post) > 0;
+    public void save(Post post) throws Exception{
+        postMapper.insert(post);
+        List<FileInfoDto> fileInfos = post.getFileInfos();
+        if (fileInfos != null && !fileInfos.isEmpty()) {
+            postMapper.registerFile(post);
+        }
     }
 
     @Override

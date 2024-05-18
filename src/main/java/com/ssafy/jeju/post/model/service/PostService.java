@@ -5,8 +5,9 @@ import java.util.List;
 
 public interface PostService {
     List<Post> findAll();
+    List<Post> findBySpotId(int id);
     Post findById(int id);
-    boolean save(Post post);
+    void save(Post post) throws Exception;
     boolean update(Post post);
     boolean delete(int id);
 }
