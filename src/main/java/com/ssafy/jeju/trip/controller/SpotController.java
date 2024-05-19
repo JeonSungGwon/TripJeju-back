@@ -19,6 +19,11 @@ public class SpotController {
 		this.spotService = spotService;
 	}
 
+	@GetMapping("id/{id}")
+	public ResponseEntity<Spot> getSpotBySpotId(@PathVariable long id) {
+		Spot spot = spotService.getSpotBySpotId(id);
+		return ResponseEntity.ok(spot);
+	}
 
 	@GetMapping("/title/{title}/{type}")
 	public ResponseEntity<List<Spot>> getSpotBySpotTitle(@PathVariable String title, @PathVariable String type) {

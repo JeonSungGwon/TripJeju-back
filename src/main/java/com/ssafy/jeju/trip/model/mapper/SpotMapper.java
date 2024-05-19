@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface SpotMapper {
+
+    Spot selectSpotBySpotId(Long id);
     List<Spot> selectSpotBySpotTitle(String title, String type);
 
     List<Spot> selectSpotBySpotTag(String tag, String type);
