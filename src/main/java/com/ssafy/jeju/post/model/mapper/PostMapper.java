@@ -14,6 +14,7 @@ public interface PostMapper {
     int insert(Post post);
     int update(Post post);
     int delete(int id);
+    int deleteFile(int postId);
     void registerFile(Post post) throws Exception;
     List<FileInfoDto> fileInfoList(int articleNo) throws Exception;
 }

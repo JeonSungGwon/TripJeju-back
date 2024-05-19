@@ -57,6 +57,7 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public boolean delete(int id) {
+        postMapper.deleteFile(id);
         return postMapper.delete(id) > 0;
     }
 }

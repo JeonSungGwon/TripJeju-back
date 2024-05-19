@@ -56,6 +56,11 @@
         WHERE id = #{id}
     </update>
 
+    <delete id="deleteFile" parameterType="int">
+        DELETE FROM file_info
+        WHERE post_id = #{postId}
+    </delete>
+
     <delete id="delete" parameterType="int">
         DELETE FROM post
         WHERE id = #{id}
