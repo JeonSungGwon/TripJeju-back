@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.jeju.visit.model.mapper.VisitMapper">
+
+    <select id="findAll" resultType="com.ssafy.jeju.visit.model.dto.Visit">
+        SELECT *
+        FROM visit
+    </select>
+
+    <select id="findById" parameterType="long" resultType="com.ssafy.jeju.visit.model.dto.Visit">
+        SELECT *
+        FROM visit
+        WHERE id = #{id}
+    </select>
+
+    <select id="findByUserId" resultType="com.ssafy.jeju.visit.model.dto.Visit">
+        SELECT *
+        FROM visit
+        WHERE user_id = #{userId}
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <insert id="insert" parameterType="com.ssafy.jeju.visit.model.dto.Visit">
+        INSERT INTO visit(place_id, user_id, visit_date)
+        VALUES (#{placeId}, #{userId}, #{visitDate})
+    </insert>
+
+    <delete id="delete" parameterType="long">
+        DELETE FROM visit
+        WHERE id = #{id}
+    </delete>
+
+    <select id="countVisitByUserAndPlace" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM visit
+        WHERE user_id = #{userId} AND place_id = #{placeId}
+    </select>
+
+    <select id="countVisitByUser" parameterType="long" resultType="int">
+        SELECT COUNT(*) FROM visit
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

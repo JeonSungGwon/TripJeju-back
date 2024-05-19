@@ -52,13 +52,14 @@ public class SpotController {
 
 	@GetMapping
 	public ResponseEntity<List<Spot>> getAllSpots(@RequestParam(defaultValue = "0") int page,
-												  @RequestParam(defaultValue = "1000") int size) {
-		List<Spot> spots = spotService.getAllSpots(page, size);
+												  @RequestParam(defaultValue = "1000") int size,
+												  @RequestParam(defaultValue = "") String search) {
+		List<Spot> spots = spotService.getAllSpots(page, size, search);
 		return ResponseEntity.ok(spots);
 	}
 	@GetMapping("/count")
-	public int getAllCount() {
-		return spotService.getAllCount();
+	public int getAllCount(@RequestParam(defaultValue = "") String search) {
+		return spotService.getAllCount(search);
 	}
 
 

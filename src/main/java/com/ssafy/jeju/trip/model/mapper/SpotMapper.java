@@ -12,6 +12,7 @@ public interface SpotMapper {
     List<Spot> selectSpotBySpotTitle(String title, String type);
 
     List<Spot> selectSpotBySpotTag(String tag, String type);
+    List<Spot> findByIds(List<Long> placeIds);
 
     List<Spot> selectSpots(@Param("title") String title,
                            @Param("tag") String tag,
@@ -29,7 +30,7 @@ public interface SpotMapper {
 
     List<Spot> selectSpotBySpotMonth(String month, String type);
 
-    List<Spot> selectAllSpots(@Param("offset") int offset, @Param("size") int size);
+    List<Spot> selectAllSpots(@Param("offset") int offset, @Param("size") int size, @Param("search") String search);
 
-	int selectAllCount();
+	int selectAllCount(String search);
 }

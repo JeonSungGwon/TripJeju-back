@@ -62,12 +62,14 @@
     <select id="selectAllSpots" resultType="com.ssafy.jeju.trip.model.dto.Spot">
         SELECT *, (SELECT COUNT(*) FROM spot) as count
         FROM spot
+        WHERE title LIKE CONCAT('%', #{search}, '%')
         LIMIT #{size} OFFSET #{offset}
     </select>
 
     <select id="selectAllCount" resultType="int">
         SELECT count(*)
         from spot
+        WHERE title LIKE CONCAT('%', #{search}, '%')
     </select>
 
     <select id="selectSpotBySpotMonth" resultType="com.ssafy.jeju.trip.model.dto.Spot">
@@ -77,6 +79,12 @@
           and type = #{type};
     </select>
 
+    <select id="findByIds" resultType="com.ssafy.jeju.trip.model.dto.Spot">
+        SELECT * FROM Spot WHERE id IN
+        <foreach item="id" collection="placeIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
 
 
 </mapper>
