@@ -3,6 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.jeju.trip.model.mapper.SpotMapper">
 
+    <select id="selectSpotBySpotId" resultType="com.ssafy.jeju.trip.model.dto.Spot">
+        SELECT *
+        FROM spot
+        WHERE id = #{id}
+    </select>
 
     <select id="selectSpotBySpotTitle" resultType="com.ssafy.jeju.trip.model.dto.Spot">
         SELECT *

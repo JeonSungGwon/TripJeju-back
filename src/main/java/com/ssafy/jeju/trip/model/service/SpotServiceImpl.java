@@ -18,6 +18,10 @@ public class SpotServiceImpl implements SpotService {
 	private final SpotMapper spotMapper;
 
 	@Override
+	public Spot getSpotBySpotId(long id) {
+		return spotMapper.selectSpotBySpotId(id);
+	}
+	@Override
 	public List<Spot> getSpotBySpotTitle(String title, String type) {
 		return spotMapper.selectSpotBySpotTitle(title, type);
 	}
