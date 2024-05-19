@@ -19,7 +19,7 @@
         WHERE user_id = #{userId}
     </select>
 
-    <insert id="insert" parameterType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
+    <insert id="insert" parameterType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO travel_route (user_id, route_name)
         VALUES (#{userId}, #{routeName})
     </insert>
