@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.jeju.routeLike.model.mapper.RouteLikeMapper">
+
+    <insert id="insertRouteLike">
+        INSERT INTO route_like (route_id, user_id)
+        VALUES (#{routeId}, #{userId})
+    </insert>
+
+    <delete id="deleteRouteLike">
+        DELETE FROM route_like
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getCountByRouteId" resultType="int">
+        SELECT COUNT(*)
+        FROM route_like
+        WHERE route_id = #{routeId}
+    </select>
+
+    <select id="getLikesByUserId" resultType="com.ssafy.jeju.routeLike.model.dto.RouteLike">
+        SELECT *
+        FROM route_like
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>
