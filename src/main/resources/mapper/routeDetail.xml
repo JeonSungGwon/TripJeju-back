@@ -3,30 +3,30 @@
 <mapper namespace="com.ssafy.jeju.routeDetail.model.mapper.RouteDetailMapper">
 
     <select id="findAll" resultType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
-        SELECT id, route_id, place_id, sequence
+        SELECT id, route_id, place_id, day, sequence, start_at, finish_at
         FROM route_detail
     </select>
 
     <select id="findById" parameterType="long" resultType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
-        SELECT id, route_id, place_id, sequence
+        SELECT id, route_id, place_id, day, sequence, start_at, finish_at
         FROM route_detail
         WHERE id = #{id}
     </select>
 
     <select id="findByRouteId" parameterType="long" resultType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
-        SELECT id, route_id, place_id, sequence
+        SELECT id, route_id, place_id, day, sequence, start_at, finish_at
         FROM route_detail
         WHERE route_id = #{routeId}
     </select>
 
     <insert id="insert" parameterType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
-        INSERT INTO route_detail (route_id, place_id, sequence)
-        VALUES (#{routeId}, #{placeId}, #{sequence})
+        INSERT INTO route_detail (route_id, place_id, day, sequence, start_at, finish_at)
+        VALUES (#{routeId}, #{placeId}, #{day}, #{sequence}, #{startAt}, #{finishAt})
     </insert>
 
     <update id="update" parameterType="com.ssafy.jeju.routeDetail.model.dto.RouteDetail">
         UPDATE route_detail
-        SET route_id = #{routeId}, place_id = #{placeId}, sequence = #{sequence}
+        SET route_id = #{routeId}, place_id = #{placeId}, day = #{day}, sequence = #{sequence}, start_at=#{startAt}, finish_at=#{finishAt}
         WHERE id = #{id}
     </update>
 
