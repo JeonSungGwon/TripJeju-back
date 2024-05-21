@@ -20,4 +20,7 @@ public class Post {
     private Timestamp updatedAt;
 
     private List<FileInfoDto> fileInfos;
+
+    private int heartCnt;
+    private boolean isCheck;
 }

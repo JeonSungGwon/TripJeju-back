@@ -1,5 +1,6 @@
 package com.ssafy.jeju.post.model.service;
 
+import com.ssafy.jeju.post.like.model.mapper.LikeMapper;
 import com.ssafy.jeju.post.model.dto.FileInfoDto;
 import com.ssafy.jeju.post.model.dto.Post;
 import com.ssafy.jeju.post.model.mapper.PostMapper;
@@ -11,8 +12,11 @@ import java.util.List;
 public class PostServiceImpl implements PostService {
     private final PostMapper postMapper;
 
-    public PostServiceImpl(PostMapper postMapper) {
+    private final LikeMapper likeMapper;
+
+    public PostServiceImpl(PostMapper postMapper, LikeMapper likeMapper) {
         this.postMapper = postMapper;
+        this.likeMapper = likeMapper;
     }
 
     @Override
@@ -22,8 +26,16 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findBySpotId(int id) {
-        return postMapper.findBySpotId(id);
+        List<Post> posts = postMapper.findBySpotId(id);
+
+        // 각각의 Post 객체에 대해 좋아요 수를 조회하여 설정
+        for (Post post : posts) {
+            int likeCount = likeMapper.selectLikeCountByPostId(post.getId());
+            post.setHeartCnt(likeCount);
+        }
+        return posts;
     }
+
 
     @Override
     public List<Post> findByUserId(int userId) {
@@ -58,6 +70,7 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public boolean delete(int id) {
         postMapper.deleteFile(id);
+        likeMapper.deletePost(id);
         return postMapper.delete(id) > 0;
     }
 }
