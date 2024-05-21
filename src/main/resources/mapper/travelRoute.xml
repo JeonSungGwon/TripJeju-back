@@ -20,13 +20,8 @@
     </select>
 
     <insert id="insert" parameterType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute" useGeneratedKeys="true" keyProperty="id">
-<<<<<<< Updated upstream
-        INSERT INTO travel_route (user_id, route_name)
-        VALUES (#{userId}, #{routeName})
-=======
         INSERT INTO travel_route (user_id, route_name, start_at, finish_at)
         VALUES (#{userId}, #{routeName}, #{startAt}, #{finishAt})
->>>>>>> Stashed changes
     </insert>
 
     <delete id="delete" parameterType="long">
