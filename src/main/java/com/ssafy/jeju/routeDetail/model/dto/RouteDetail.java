@@ -11,5 +11,8 @@ public class RouteDetail {
     private long id;
     private long routeId;
     private long placeId;
+    private int day;
     private int sequence;
+    private String startAt;
+    private String finishAt;
 }

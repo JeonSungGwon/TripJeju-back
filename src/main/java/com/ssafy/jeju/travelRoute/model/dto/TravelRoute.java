@@ -12,5 +12,6 @@ public class TravelRoute {
     private long id;
     private long userId;
     private String routeName;
-    private Timestamp createdAt;
+    private Timestamp startAt;
+    private Timestamp finishAt;
 }

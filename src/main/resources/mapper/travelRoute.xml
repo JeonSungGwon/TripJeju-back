@@ -3,25 +3,30 @@
 <mapper namespace="com.ssafy.jeju.travelRoute.model.mapper.TravelRouteMapper">
 
     <select id="findAll" resultType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
-        SELECT id, user_id, route_name, created_at
+        SELECT id, user_id, route_name, start_at, finish_at
         FROM travel_route
     </select>
 
     <select id="findById" parameterType="long" resultType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
-        SELECT id, user_id, route_name, created_at
+        SELECT id, user_id, route_name, start_at, finish_at
         FROM travel_route
         WHERE id = #{id}
     </select>
 
     <select id="findByUserId" parameterType="long" resultType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
-        SELECT id, user_id, route_name, created_at
+        SELECT id, user_id, route_name, start_at, finish_at
         FROM travel_route
         WHERE user_id = #{userId}
     </select>
 
-    <insert id="insert" parameterType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
+    <insert id="insert" parameterType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute" useGeneratedKeys="true" keyProperty="id">
+<<<<<<< Updated upstream
         INSERT INTO travel_route (user_id, route_name)
         VALUES (#{userId}, #{routeName})
+=======
+        INSERT INTO travel_route (user_id, route_name, start_at, finish_at)
+        VALUES (#{userId}, #{routeName}, #{startAt}, #{finishAt})
+>>>>>>> Stashed changes
     </insert>
 
     <delete id="delete" parameterType="long">
