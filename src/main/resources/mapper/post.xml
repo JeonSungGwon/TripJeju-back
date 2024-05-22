@@ -56,6 +56,14 @@
         WHERE id = #{id}
     </update>
 
+    <update id="updateFile" parameterType="com.ssafy.jeju.post.model.dto.Post">
+        <foreach collection="fileInfos" item="fileinfo" separator=";">
+            UPDATE file_info
+            SET save_folder = #{fileinfo.saveFolder}, original_file = #{fileinfo.originalFile}, save_file = #{fileinfo.saveFile}
+            WHERE post_id = #{id} AND original_file = #{fileinfo.originalFile}
+        </foreach>
+    </update>
+
     <delete id="deleteFile" parameterType="int">
         DELETE FROM file_info
         WHERE post_id = #{postId}

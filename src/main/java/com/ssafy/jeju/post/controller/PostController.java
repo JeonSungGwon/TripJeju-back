@@ -2,6 +2,7 @@ package com.ssafy.jeju.post.controller;
 
 import com.ssafy.jeju.post.model.dto.FileInfoDto;
 import com.ssafy.jeju.post.model.dto.Post;
+import com.ssafy.jeju.post.model.mapper.PostMapper;
 import com.ssafy.jeju.post.model.service.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,9 +30,11 @@ public class PostController {
     @Value("${file.path.upload-files}")
     private String uploadFilePath;
     private final PostService postService;
+    private final PostMapper postMapper;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, PostMapper postMapper) {
         this.postService = postService;
+        this.postMapper = postMapper;
     }
 
     @GetMapping
@@ -90,9 +93,12 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> updatePost(@PathVariable int id, @RequestBody Post post) {
+    public ResponseEntity<Post> updatePost(@PathVariable int id, @RequestPart("post") Post post, @RequestParam(value = "upfile", required = false) MultipartFile[] files) throws Exception{
+
+        System.out.println(post.getFileInfos());
         post.setId(id);
-        if (postService.update(post)) {
+        post.setFileInfos(postMapper.fileInfoList(id));
+        if (postService.update(post,id)) {
             return ResponseEntity.ok(post);
         } else {
             return ResponseEntity.notFound().build();

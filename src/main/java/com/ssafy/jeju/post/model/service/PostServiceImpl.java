@@ -62,8 +62,14 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public boolean update(Post post) {
-        return postMapper.update(post) > 0;
+    public boolean update(Post post, int id) throws Exception {
+        int cnt = postMapper.update(post);
+        List<FileInfoDto> fileInfos = post.getFileInfos();
+        if (fileInfos != null && !fileInfos.isEmpty()) {
+            postMapper.deleteFile(id);
+            postMapper.registerFile(post);
+        }
+        return cnt > 0;
     }
 
     @Override

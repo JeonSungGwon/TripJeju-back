@@ -33,7 +33,11 @@ public class VisitServiceImpl implements VisitService {
 
     @Override
     public boolean save(Visit visit) {
-        return visitMapper.insert(visit) > 0;
+        System.out.println(isVisit(visit.getUserId(), visit.getPlaceId()));
+        if(!isVisit(visit.getUserId(), visit.getPlaceId())){
+            visitMapper.insert(visit);
+        }
+        return true;
     }
 
     @Override
