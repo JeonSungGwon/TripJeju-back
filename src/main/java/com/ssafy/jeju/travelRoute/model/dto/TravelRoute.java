@@ -14,4 +14,5 @@ public class TravelRoute {
     private String routeName;
     private Timestamp startAt;
     private Timestamp finishAt;
+    private String img;
 }

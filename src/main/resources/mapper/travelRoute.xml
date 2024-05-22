@@ -3,25 +3,37 @@
 <mapper namespace="com.ssafy.jeju.travelRoute.model.mapper.TravelRouteMapper">
 
     <select id="findAll" resultType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
-        SELECT id, user_id, route_name, start_at, finish_at
+        SELECT id, user_id, route_name, start_at, finish_at, img
         FROM travel_route
+        <where>
+            <if test="search != null and search != ''">
+                route_name LIKE CONCAT('%', #{search}, '%')
+            </if>
+        </where>
+        LIMIT #{offset}, #{size}
     </select>
 
     <select id="findById" parameterType="long" resultType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
-        SELECT id, user_id, route_name, start_at, finish_at
+        SELECT id, user_id, route_name, start_at, finish_at, img
         FROM travel_route
         WHERE id = #{id}
     </select>
 
     <select id="findByUserId" parameterType="long" resultType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute">
-        SELECT id, user_id, route_name, start_at, finish_at
+        SELECT id, user_id, route_name, start_at, finish_at, img
         FROM travel_route
         WHERE user_id = #{userId}
     </select>
 
+    <select id="count" parameterType="string" resultType="long">
+        SELECT COUNT(*)
+        FROM travel_route
+        WHERE route_name LIKE CONCAT('%', #{search}, '%')
+    </select>
+
     <insert id="insert" parameterType="com.ssafy.jeju.travelRoute.model.dto.TravelRoute" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO travel_route (user_id, route_name, start_at, finish_at)
-        VALUES (#{userId}, #{routeName}, #{startAt}, #{finishAt})
+        INSERT INTO travel_route (user_id, route_name, start_at, finish_at, img)
+        VALUES (#{userId}, #{routeName}, #{startAt}, #{finishAt}, #{img})
     </insert>
 
     <delete id="delete" parameterType="long">

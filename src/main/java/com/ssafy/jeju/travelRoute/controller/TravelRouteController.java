@@ -17,8 +17,12 @@ public class TravelRouteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<TravelRoute>> getAllTravelRoutes() {
-        return ResponseEntity.ok(travelRouteService.findAll());
+    public ResponseEntity<List<TravelRoute>> getAllTravelRoutes(
+            @RequestParam(required = false) String search,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "12") int size) {
+        List<TravelRoute> travelRoutes = travelRouteService.findAll(search, page, size);
+        return ResponseEntity.ok(travelRoutes);
     }
 
     @GetMapping("/{id}")
@@ -31,6 +35,12 @@ public class TravelRouteController {
     public ResponseEntity<List<TravelRoute>> getTravelRoutesByUserId(@PathVariable long userId) {
         List<TravelRoute> travelRoutes = travelRouteService.findByUserId(userId);
         return !travelRoutes.isEmpty() ? ResponseEntity.ok(travelRoutes) : ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countTravelRoutes(@RequestParam(required = false) String search) {
+        long count = travelRouteService.count(search);
+        return ResponseEntity.ok(count);
     }
 
     @PostMapping

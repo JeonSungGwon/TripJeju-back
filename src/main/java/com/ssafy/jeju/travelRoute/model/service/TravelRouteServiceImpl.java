@@ -4,6 +4,7 @@ import com.ssafy.jeju.travelRoute.model.dto.TravelRoute;
 import com.ssafy.jeju.travelRoute.model.mapper.TravelRouteMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -15,8 +16,9 @@ public class TravelRouteServiceImpl implements TravelRouteService {
     }
 
     @Override
-    public List<TravelRoute> findAll() {
-        return travelRouteMapper.findAll();
+    public List<TravelRoute> findAll(String search, int page, int size) {
+        int offset = page * size;
+        return travelRouteMapper.findAll(search, offset, size);
     }
 
     @Override
@@ -27,6 +29,11 @@ public class TravelRouteServiceImpl implements TravelRouteService {
     @Override
     public List<TravelRoute> findByUserId(long userId) {
         return travelRouteMapper.findByUserId(userId);
+    }
+
+    @Override
+    public long count(String search) {
+        return travelRouteMapper.count(search);
     }
 
     @Override
