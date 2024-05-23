@@ -46,4 +46,9 @@ public class FavoriteServiceImpl implements FavoriteService {
         int count = favoriteMapper.countFavorites(userId, placeId);
         return count > 0;
     }
+
+    @Override
+    public int getByUserCount(long userId){
+        return favoriteMapper.getByUserCount(userId);
+    }
 }

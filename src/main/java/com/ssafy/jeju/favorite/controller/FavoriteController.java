@@ -27,6 +27,11 @@ public class FavoriteController {
         return favorite != null ? ResponseEntity.ok(favorite) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("user/count/{userId}")
+    public int getByUserCount(@PathVariable long userId){
+        return favoriteService.getByUserCount(userId);
+    }
+
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Favorite>> getFavoritesByUserId(@PathVariable long userId) {
         List<Favorite> favorites = favoriteService.findByUserId(userId);

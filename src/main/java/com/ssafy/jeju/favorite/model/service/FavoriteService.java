@@ -9,5 +9,6 @@ public interface FavoriteService {
     List<Favorite> findByUserId(long userId);
     boolean save(Favorite favorite);
     boolean delete(long id);
+    int getByUserCount(long userId);
     boolean isFavorite(long userId, long placeId);
 }

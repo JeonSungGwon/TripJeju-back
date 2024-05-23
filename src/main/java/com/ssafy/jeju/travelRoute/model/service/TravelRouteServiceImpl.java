@@ -17,8 +17,7 @@ public class TravelRouteServiceImpl implements TravelRouteService {
 
     @Override
     public List<TravelRoute> findAll(String search, int page, int size) {
-        int offset = page * size;
-        return travelRouteMapper.findAll(search, offset, size);
+        return travelRouteMapper.findAll(search, page, size);
     }
 
     @Override
@@ -29,6 +28,11 @@ public class TravelRouteServiceImpl implements TravelRouteService {
     @Override
     public List<TravelRoute> findByUserId(long userId) {
         return travelRouteMapper.findByUserId(userId);
+    }
+
+    @Override
+    public int countByUserId(long userId){
+        return travelRouteMapper.countByUserId(userId);
     }
 
     @Override

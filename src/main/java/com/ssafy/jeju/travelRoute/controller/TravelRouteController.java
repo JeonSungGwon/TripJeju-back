@@ -25,6 +25,11 @@ public class TravelRouteController {
         return ResponseEntity.ok(travelRoutes);
     }
 
+    @GetMapping("user/count/{userId}")
+    public int getAllByUser(@PathVariable long userId){
+        return travelRouteService.countByUserId(userId);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<TravelRoute> getTravelRouteById(@PathVariable long id) {
         TravelRoute travelRoute = travelRouteService.findById(id);

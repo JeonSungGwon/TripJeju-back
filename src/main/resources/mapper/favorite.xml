@@ -28,6 +28,11 @@
         DELETE FROM favorite
         WHERE id = #{id}
     </delete>
+    <select id="getByUserCount" parameterType="long" resultType="int">
+        SELECT COUNT(*)
+        FROM favorite
+        WHERE user_id = #{userId}
+    </select>
 
     <select id="countFavorites" parameterType="long" resultType="int">
         SELECT COUNT(*) FROM favorite

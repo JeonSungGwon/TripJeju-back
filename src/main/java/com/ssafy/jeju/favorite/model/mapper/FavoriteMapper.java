@@ -10,6 +10,7 @@ public interface FavoriteMapper {
     Favorite findById(long id);
     List<Favorite> findByUserId(long userId);
     int insert(Favorite favorite);
+    int getByUserCount(long userId);
     int delete(long id);
     int countFavorites(long userId, long placeId);
 }
