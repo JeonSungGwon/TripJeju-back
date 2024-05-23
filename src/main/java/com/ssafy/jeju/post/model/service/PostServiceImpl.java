@@ -39,7 +39,13 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> findByUserId(int userId) {
-        return postMapper.findByUserId(userId);
+        List<Post> posts = postMapper.findByUserId(userId);
+        for (Post post : posts) {
+            int likeCount = likeMapper.selectLikeCountByPostId(post.getId());
+            post.setHeartCnt(likeCount);
+
+        }
+        return posts;
     }
 
     @Override

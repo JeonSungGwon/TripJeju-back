@@ -2,6 +2,8 @@ package com.ssafy.jeju.trip.model.dto;
 
 import lombok.*;
 
+import java.sql.Date;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,4 +23,5 @@ public class Spot {
     private String phoneNumber;
     private String imgPath;
     private String thumbnailPath;
+    private Date visitDate;
 }   

@@ -23,13 +23,14 @@
     </select>
 
     <select id="findBySpotId" parameterType="int" resultMap="viewArticle">
-        SELECT id, spot_id, user_id, title, content
+        SELECT id, spot_id, user_id, title, content, created_at
         FROM post
         WHERE spot_id = #{id}
+        ORDER BY created_at ASC
     </select>
 
     <select id="findByUserId" parameterType="int" resultMap="viewArticle">
-        SELECT id, spot_id, user_id, title, content
+        SELECT id, spot_id, user_id, title, content, created_at
         FROM post
         WHERE user_id = #{userId}
     </select>

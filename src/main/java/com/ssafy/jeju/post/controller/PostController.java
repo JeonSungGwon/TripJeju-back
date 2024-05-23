@@ -54,8 +54,16 @@ public class PostController {
     }
 
     @GetMapping("/spot/{spotId}")
-    public ResponseEntity<List<Post>> getPostByPostId(@PathVariable int spotId) {
-        return ResponseEntity.ok(postService.findBySpotId(spotId));
+    public ResponseEntity<List<Post>> getPostByPostId(@PathVariable int spotId, @RequestParam(required = false) String orderBy) {
+        List<Post> posts;
+        if ("likes".equals(orderBy)) {
+            // 좋아요 많은 순으로 정렬
+            posts = postService.findBySpotId(spotId);
+        } else {
+            // 기본적으로 최신순으로 정렬
+            posts = postService.findBySpotId(spotId);
+        }
+        return ResponseEntity.ok(posts);
     }
 
     @PostMapping

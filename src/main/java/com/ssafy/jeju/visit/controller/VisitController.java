@@ -9,7 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,7 +54,21 @@ public class VisitController {
         // Fetch spots for each placeId
         List<Spot> spots = spotService.findByIds(placeIds);
 
+        // Create a map of placeId to visitDate
+        Map<Long, Date> visitDateMap = visits.stream()
+                .collect(Collectors.toMap(Visit::getPlaceId, Visit::getVisitDate));
+
+        // Set visitDate in each spot
+        spots.forEach(spot -> {
+            Long placeId = spot.getId();
+            Date visitDate = visitDateMap.get(placeId);
+            if (visitDate != null) {
+                spot.setVisitDate(visitDate);
+            }
+        });
+
         return ResponseEntity.ok(spots);
+
     }
 
     @PostMapping
