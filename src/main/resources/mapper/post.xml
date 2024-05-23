@@ -17,7 +17,7 @@
     </select>
 
     <select id="findById" parameterType="int" resultType="com.ssafy.jeju.post.model.dto.Post">
-        SELECT spot_id, user_id, title, content
+        SELECT spot_id, user_id, title, content, created_at
         FROM post
         WHERE id = #{id}
     </select>

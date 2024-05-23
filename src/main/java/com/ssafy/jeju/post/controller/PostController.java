@@ -102,15 +102,11 @@ public class PostController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable int id, @RequestPart("post") Post post, @RequestParam(value = "upfile", required = false) MultipartFile[] files) throws Exception{
-
-        System.out.println(post.getFileInfos());
         post.setId(id);
-        post.setFileInfos(postMapper.fileInfoList(id));
-        if (postService.update(post,id)) {
-            return ResponseEntity.ok(post);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        Post p = postService.update(post,id);
+        p.setId(id);
+        p.setFileInfos(postMapper.fileInfoList(id));
+        return ResponseEntity.ok(p);
     }
 
     @DeleteMapping("/{id}")
